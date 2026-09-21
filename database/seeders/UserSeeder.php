@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -14,10 +15,52 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         //
-        User::factory()->create([
-            'name' => 'Indra',
-            'email' => 'Indra@gmail.com',
-            'password' => bcrypt('Indra123'),
-        ]);
+        $users = [
+            [
+                'name'     => 'Galih Kuncoro',//nih admin cuy
+                'email'    => 'galih@company.com',
+                'password' => Hash::make('password'),
+            ],
+            /////////////////////////////////////////////////
+            [
+                'name'     => 'Budi Santoso',
+                'email'    => 'budi@company.com',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'name'     => 'Siti Rahayu',
+                'email'    => 'siti@company.com',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'name'     => 'Sandi Sans',
+                'email'    => 'sandi@company.com',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'name'     => 'Mulyadi',
+                'email'    => 'mulyadi@company.com',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'name'     => 'Sinta Saputri',
+                'email'    => 'sinta@company.com',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'name'     => 'Ferry kusuma',
+                'email'    => 'ferry@company.com',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'name'     => 'Dedeng Sukandar',
+                'email'    => 'dedeng@company.com',
+                'password' => Hash::make('password'),
+            ],
+        ];
+
+        foreach ($users as $user) {
+            User::create($user);
+        }
     }
 }

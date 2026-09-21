@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Companies\Schemas;
+namespace App\Filament\Resources\Departments\Schemas;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
@@ -8,20 +8,22 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use League\Flysystem\Visibility;
 
-class CompanyForm
+class DepartmentForm
 {
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
-                Section::make('Company Information')
-                    ->icon('heroicon-o-building-office')
+                Section::make('Department Information')
+                    ->icon('heroicon-o-building-storefront')
                     ->iconColor('primary')
-                    ->description('Please fill in the company information below.')
+                    ->description('Please fill in the department information below.')
                     ->columns(2)
                     ->columnSpan(3)
                     ->schema([
                         TextInput::make('name')
+                            ->required(),
+                        TextInput::make('description')
                             ->required(),
                         TextInput::make('address')
                             ->required(),
@@ -34,10 +36,10 @@ class CompanyForm
                             ->required(),
                     ]),
 
-                Section::make('Company Logo')
+                Section::make('Department Logo')
                     ->icon('heroicon-o-photo')
                     ->iconColor('primary')
-                    ->description('Upload the company logo here.')
+                    ->description('Upload the department logo here.')
                     ->columns(1)
                     ->schema([
                         FileUpload::make('logo')

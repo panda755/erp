@@ -15,9 +15,9 @@ class CompanySeeder extends Seeder
     {
         //
         Company::create([
-            'name' => 'PT Indra Jaya Sentosa',
-            'address' => 'Jl. Maharaja Indra no.123, Riau',
-            'email' => 'IndraJayaSentosa@example.com',
+            'name' => "Galih's Company",
+            'address' => 'Jl. Maharaja Galih no.123, Riau',
+            'email' => "Galih'scompany@example.com",
             'phone_number' => '081234567890'
     
         ]);
