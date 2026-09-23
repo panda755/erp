@@ -2,11 +2,13 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\ProfilSaya;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\MenuItem;
+// use Filament\Navigation\NavigationGroup;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -57,8 +59,16 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->NavigationGroups([
-                'Human Resource Management',
-                'Settings'
+                'Settings',
+                'Human Resource Management'
+            ])
+            ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+            ])
+            ->userMenuItems([
+                'profil-saya' => MenuItem::make()
+                    ->label('Profil Saya')
+                    ->url(fn(): string => ProfilSaya::getUrl()),
             ]);
     }
 }

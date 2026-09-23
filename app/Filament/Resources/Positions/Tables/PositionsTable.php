@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources\Positions\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+// use Filament\Actions\BulkActionGroup;
+// use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\DeleteAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\EditAction;
 use Filament\Tables\Table;
 
@@ -13,18 +15,19 @@ class PositionsTable
     {
         return $table
             ->columns([
-                //
-            ])
-            ->filters([
-                //
+                TextColumn::make('department.name')
+                    ->label('Departemen')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('name')
+                    ->searchable(),
+                TextColumn::make('allowance')
+                    ->money('IDR')
+                    ->sortable(),
             ])
             ->recordActions([
                 EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                DeleteAction::make(),
             ]);
     }
 }

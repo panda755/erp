@@ -17,7 +17,11 @@ class EmployeeForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
+                Select::make('user_id')
+                    ->label('Nama (Akun User)')
+                    ->relationship('user', 'name')
+                    ->searchable()
+                    ->preload()
                     ->required(),
                 Select::make('department_id')
                     ->label('Department')
@@ -45,23 +49,38 @@ class EmployeeForm
                     ]),
                 TextInput::make('address'),
                 TextInput::make('place_of_birth'),
-                TextInput::make('date_of_birth'),
+                DatePicker::make('date_of_birth')
+                    ->label('Tanggal Lahir')
+                    ->maxDate(now()->subYears(15))   // cegah input usia tidak masuk akal
+                    ->displayFormat('d/m/Y')
+                    ->native(false),
+
                 TextInput::make('phone_number')
                     ->tel(),
                 TextInput::make('salary')
                     ->required()
                     ->numeric()
                     ->default(0),
-                DatePicker::make('start_date'),
-                DatePicker::make('end_date'),
+                DatePicker::make('start_date')
+                    ->label('Tanggal Mulai Kerja')
+                    ->maxDate(now())                 // tidak boleh mulai kerja di masa depan
+                    ->displayFormat('d/m/Y')
+                    ->native(false),
+                DatePicker::make('end_date')
+                    ->label('Tanggal Berhenti')
+                    ->afterOrEqual('start_date')     // tidak boleh berhenti sebelum mulai kerja
+                    ->displayFormat('d/m/Y')
+                    ->native(false)
+                    ->visible(fn($get) => $get('status') === 'former'),
                 Select::make('status')
                     ->options([
                         'applicant' => 'Applicant',
                         'active'    => 'Active',
                         'trainee'   => 'Trainee',
-                        'Former'         => 'Former',
+                        'former'         => 'Former',
                     ])
-                    ->required(),
+                    ->required()
+                    ->live(),
                 FileUpload::make('image')
                     ->image()
                     ->directory('employees'),

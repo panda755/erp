@@ -16,23 +16,37 @@ class DepartmentsTable
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()
+                    ->limit(25),
+
                 TextColumn::make('description')
-                    ->searchable(),
+                    ->searchable()
+                    ->wrap()
+                    ->limit(50),
+
                 TextColumn::make('address')
-                    ->searchable(),
+                    ->searchable()
+                    ->wrap()
+                    ->limit(30),
+
                 TextColumn::make('email')
-                    ->label('Email address')
-                    ->searchable(),
+                    ->label('Email')
+                    ->searchable()
+                    ->limit(30),
+
                 TextColumn::make('phone_number')
-                    ->searchable(),
+                    ->searchable()
+                    ->width('120px'),
+
                 ImageColumn::make('logo')
                     ->disk('public')
-                    ->searchable(),
+                    ->size(40),
+
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()

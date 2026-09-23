@@ -20,6 +20,7 @@ class PositionResource extends Resource
     protected static ?string $model = Position::class;
 
     protected static string|UnitEnum|null $navigationGroup = 'Human Resource Management';
+    protected static ?int $navigationSort = 2;
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Briefcase;
 
     protected static ?string $recordTitleAttribute = 'name';
