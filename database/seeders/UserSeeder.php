@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         //
         $users = [
             [
-                'name'     => 'Galih Kuncoro',//nih admin cuy
+                'name'     => 'Galih Kuncoro', //nih admin cuy
                 'email'    => 'galih@company.com',
                 'password' => Hash::make('password'),
             ],
@@ -59,8 +59,15 @@ class UserSeeder extends Seeder
             ],
         ];
 
-        foreach ($users as $user) {
-            User::create($user);
+        foreach ($users as $index => $userData) {
+            $user = User::create($userData);
+
+            // Index 0 = Galih (superadmin), sisanya employee
+            if ($index === 0) {
+                $user->assignRole('super_admin');
+            } else {
+                $user->assignRole('Employee');
+            }
         }
     }
 }

@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             PositionSeeder::class,
             EmployeeSeeder::class,
+            LeaveTypeSeeder::class, // ← tambahkan baris ini
         ]);
     }
 }
